@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#0f172a" />
+  <title>QR Scanner</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="app__header">
+      <h1>QR Scanner</h1>
+      <p class="app__subtitle">Scan a QR code with your camera or upload an image to read the data inside it.</p>
+    </header>
+
+    <!-- Mode switch -->
+    <div class="tabs" role="tablist">
+      <button class="tab tab--active" id="tab-camera" role="tab" aria-selected="true">Camera</button>
+      <button class="tab" id="tab-upload" role="tab" aria-selected="false">Upload image</button>
+    </div>
+
+    <!-- Camera panel -->
+    <section class="panel panel--active" id="panel-camera">
+      <div class="scanner">
+        <video id="video" class="scanner__video" playsinline muted></video>
+        <div class="scanner__frame" aria-hidden="true">
+          <span class="corner corner--tl"></span>
+          <span class="corner corner--tr"></span>
+          <span class="corner corner--bl"></span>
+          <span class="corner corner--br"></span>
+        </div>
+        <p class="scanner__hint" id="camera-hint">Press “Start camera” and point it at a QR code.</p>
+      </div>
+      <div class="controls">
+        <button class="btn btn--primary" id="btn-start">Start camera</button>
+        <button class="btn" id="btn-stop" disabled>Stop</button>
+      </div>
+    </section>
+
+    <!-- Upload panel -->
+    <section class="panel" id="panel-upload" hidden>
+      <label class="dropzone" id="dropzone" for="file-input">
+        <input type="file" id="file-input" accept="image/*" hidden />
+        <div class="dropzone__inner">
+          <svg viewBox="0 0 24 24" class="dropzone__icon" aria-hidden="true">
+            <path d="M12 16V4m0 0L8 8m4-4 4 4M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <strong>Tap to choose an image</strong>
+          <span>or drag &amp; drop a QR code photo / screenshot here</span>
+        </div>
+      </label>
+      <img id="preview" class="preview" alt="Selected image preview" hidden />
+    </section>
+
+    <!-- Result -->
+    <section class="result" id="result" hidden>
+      <div class="result__head">
+        <span class="result__badge" id="result-badge">TEXT</span>
+        <span class="result__label">Decoded data</span>
+      </div>
+      <div class="result__content" id="result-content"></div>
+      <div class="result__actions">
+        <button class="btn btn--primary" id="btn-copy">Copy</button>
+        <a class="btn" id="btn-open" target="_blank" rel="noopener" hidden>Open link</a>
+        <button class="btn" id="btn-clear">Scan again</button>
+      </div>
+    </section>
+
+    <!-- Status / errors -->
+    <p class="status" id="status" role="status" aria-live="polite"></p>
+  </main>
+
+  <!-- Hidden canvas used to extract pixels for decoding -->
+  <canvas id="canvas" hidden></canvas>
+
+  <script src="vendor/jsQR.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(New-Item -ItemType Directory -Force \"d:\\\\Freelance Projects\\\\Scanner\\\\vendor\" | Out-Null; Invoke-WebRequest -Uri \"https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js\" -OutFile \"d:\\\\Freelance Projects\\\\Scanner\\\\vendor\\\\jsQR.js\"; \\(Get-Item \"d:\\\\Freelance Projects\\\\Scanner\\\\vendor\\\\jsQR.js\"\\).Length)"
+    ]
+  }
+}

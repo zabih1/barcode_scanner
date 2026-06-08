@@ -17,6 +17,9 @@
 
 * { box-sizing: border-box; }
 
+/* The hidden attribute must always win over display rules below. */
+[hidden] { display: none !important; }
+
 html, body {
   margin: 0;
   padding: 0;
@@ -59,11 +62,15 @@ html, body {
 }
 .preview__video,
 .preview__image {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
   display: block;
 }
+/* Camera fills the frame; uploaded image shows in full (no cropping). */
+.preview__video { object-fit: cover; }
+.preview__image { object-fit: contain; }
 .preview__placeholder {
   position: absolute;
   inset: 0;

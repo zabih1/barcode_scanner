@@ -22,6 +22,7 @@
   const rawText = document.getElementById("raw-text");
   const btnCopy = document.getElementById("btn-copy");
   const btnClear = document.getElementById("btn-clear");
+  const copyMsg = document.getElementById("copy-msg");
 
   const statusEl = document.getElementById("status");
 
@@ -29,6 +30,15 @@
   let stream = null;
   let rafId = null;
   let lastDecoded = "";
+  let copyMsgTimer = null;
+
+  // Show a brief confirmation near the camera/upload buttons.
+  function showCopyMsg(msg) {
+    copyMsg.textContent = msg;
+    copyMsg.hidden = false;
+    if (copyMsgTimer) clearTimeout(copyMsgTimer);
+    copyMsgTimer = setTimeout(() => { copyMsg.hidden = true; }, 2500);
+  }
 
   // ---------- Helpers ----------
   function setStatus(msg, kind) {
@@ -195,6 +205,8 @@
     fields.textContent = "";
     rawText.textContent = "";
     lastDecoded = "";
+    if (copyMsgTimer) clearTimeout(copyMsgTimer);
+    copyMsg.hidden = true;
     setStatus("");
   }
 
@@ -338,6 +350,7 @@
     try {
       await navigator.clipboard.writeText(lastDecoded);
       setStatus("Copied to clipboard.", "ok");
+      showCopyMsg("Copied to clipboard.");
     } catch (_) {
       const ta = document.createElement("textarea");
       ta.value = lastDecoded;
@@ -348,6 +361,7 @@
       try {
         document.execCommand("copy");
         setStatus("Copied to clipboard.", "ok");
+        showCopyMsg("Copied to clipboard.");
       } catch (e2) {
         setStatus("Could not copy automatically — select the text and copy it.", "error");
       }

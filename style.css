@@ -137,15 +137,6 @@ html, body {
   color: var(--mint-text);
 }
 
-/* Copy confirmation shown near the camera/upload buttons */
-.controls__msg {
-  margin: 12px 0 0;
-  text-align: center;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--ok);
-}
-
 /* Result */
 .result {
   margin-top: 20px;

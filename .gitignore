@@ -1,0 +1,8 @@
+# Editor / tooling
+.claude/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Dependencies (none needed — jsQR is vendored in vendor/)
+node_modules/

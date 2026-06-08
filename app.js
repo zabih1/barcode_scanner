@@ -21,7 +21,6 @@
   const fields = document.getElementById("fields");
   const rawText = document.getElementById("raw-text");
   const btnCopy = document.getElementById("btn-copy");
-  const btnOpen = document.getElementById("btn-open");
   const btnClear = document.getElementById("btn-clear");
 
   const statusEl = document.getElementById("status");
@@ -186,13 +185,6 @@
       fields.appendChild(wrap);
     });
 
-    if (parsed.link) {
-      btnOpen.href = parsed.link;
-      btnOpen.hidden = false;
-    } else {
-      btnOpen.hidden = true;
-    }
-
     result.hidden = false;
     setStatus("QR code decoded.", "ok");
     result.scrollIntoView({ behavior: "smooth", block: "nearest" });
@@ -202,7 +194,6 @@
     result.hidden = true;
     fields.textContent = "";
     rawText.textContent = "";
-    btnOpen.hidden = true;
     lastDecoded = "";
     setStatus("");
   }

@@ -101,17 +101,24 @@ html, body {
   align-items: center;
   justify-content: center;
   gap: 9px;
-  flex: 1;
+  flex: 1 1 0;
+  min-width: 0;
   border: 1px solid transparent;
   padding: 14px 16px;
   border-radius: 14px;
   font-size: 0.98rem;
   font-weight: 600;
+  line-height: 1;
   cursor: pointer;
   text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
   transition: filter 0.15s, opacity 0.15s, background 0.15s;
 }
+.btn svg { flex: 0 0 auto; }
+.btn span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .btn:hover:not(:disabled) { filter: brightness(1.05); }
+.btn:active:not(:disabled) { filter: brightness(0.96); }
 .btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
 .btn--primary {
@@ -213,3 +220,22 @@ html, body {
 }
 .status--error { color: var(--danger); }
 .status--ok { color: var(--ok); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 600px) {
+  .app { padding: 20px 14px 44px; }
+  .app__header h1 { font-size: 1.5rem; }
+  .app__subtitle { font-size: 0.9rem; }
+  .card { padding: 12px; border-radius: 18px; }
+}
+
+/* Narrow phones: stack the action buttons so labels never clip. */
+@media (max-width: 380px) {
+  .controls { flex-direction: column; }
+  .btn { width: 100%; }
+}
+
+/* Landscape phones / short viewports: cap the preview height. */
+@media (max-height: 520px) and (orientation: landscape) {
+  .preview { aspect-ratio: auto; height: 46vh; min-height: 200px; }
+}
